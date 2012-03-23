@@ -10,6 +10,7 @@ namespace WpfApplication1.Configuration
 
    public class CONFIGURATION
     {
+   	//New Comment
 
         private TIER[] tIERSField;
 
