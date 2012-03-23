@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8" ?><SOLUTION>
+  <NAME>BISolution</NAME>
+  <CONFIGURATION>
+    <TIERS>
+     <!-- TIER FOR LOCAL WITH OVERRIDE CAPABILITIES -->
+      <TIER>
+       <NAME>DEV</NAME>
+        <SSMS>
+          <SERVERNAME>KTHEJOKER\SQLEXPRESS</SERVERNAME>
+          <DATABASES>
+            <DATABASE LAYER="STAGE">
+              <NAME>Commercial_STG</NAME>
+              <CONNECTIONSTRING></CONNECTIONSTRING>
+            </DATABASE>
+            <DATABASE LAYER="PSA">
+              <NAME>Commercial_PSA</NAME>
+              <CONNECTIONSTRING></CONNECTIONSTRING>
+            </DATABASE>
+            <DATABASE LAYER="RUN">
+              <NAME>Commercial_RUN</NAME>
+              <CONNECTIONSTRING></CONNECTIONSTRING>
+            </DATABASE>
+            <DATABASE LAYER="MATCH">
+              <NAME>Commercial_MATCH</NAME>
+              <CONNECTIONSTRING></CONNECTIONSTRING>
+            </DATABASE>
+            <DATABASE LAYER="DIM">
+              <NAME>Commercial_DIM</NAME>
+              <CONNECTIONSTRING></CONNECTIONSTRING>
+            </DATABASE>
+            <DATABASE LAYER="Fact">
+              <NAME>Commercial_FACT</NAME>
+              <CONNECTIONSTRING></CONNECTIONSTRING>
+            </DATABASE>
+            <DATABASE LAYER="MAP">
+              <NAME>Commercial_MAP</NAME>
+              <CONNECTIONSTRING></CONNECTIONSTRING>
+            </DATABASE>
+            <DATABASE LAYER="META">
+              <NAME>Commercial_META</NAME>
+              <CONNECTIONSTRING></CONNECTIONSTRING>
+            </DATABASE>
+          </DATABASES>
+        </SSMS>
+        <SSIS>
+         
+            <PACKAGECONFIGURATIONFOLDER>C:\BISolution\SSIS\Config</PACKAGECONFIGURATIONFOLDER>
+            <CONNECTIONPREFIX>connect_</CONNECTIONPREFIX>
+        
+        </SSIS>
+        <SSRS></SSRS>
+        <SSAS></SSAS>
+      </TIER>
+    </TIERS>
+    <SOURCECONTROL></SOURCECONTROL>
+  </CONFIGURATION>
+
+  <DATASOURCES>
+    <DATASOURCE NAME="Nucleus" TYPE="SQL Server">
+      <SERVERNAME>KTHEJOKER\SQLEXPRESS</SERVERNAME>
+      <DATABASENAME>Nucleus</DATABASENAME>
+      <CONNECTIONSTRING></CONNECTIONSTRING>
+      <DATAOBJECTS>
+        <DATAOBJECT TYPE="DIMENSION" NAME="USERS">
+          <SOURCEQUERY>select * from dbo.[USERS]</SOURCEQUERY>
+          <MATCHDATASET>User</MATCHDATASET>
+          <NATURALKEY>
+            <NATURALKEYCOLUMN>UserName</NATURALKEYCOLUMN>
+          </NATURALKEY>
+          <LOADTYPE>FULL</LOADTYPE>
+          <TIMESTAMPCOLUMN></TIMESTAMPCOLUMN>
+        </DATAOBJECT>
+        <DATAOBJECT TYPE="FACT" NAME="POWER_DEALS">
+          <SOURCEQUERY>select * from Power_Deals</SOURCEQUERY>
+          <MATCHDATASET>PowerDeal</MATCHDATASET>
+          <NATURALKEY>
+            <NATURALKEYCOLUMN>DealID</NATURALKEYCOLUMN>
+          </NATURALKEY>
+          <LOADTYPE>FULL</LOADTYPE>
+          <TIMESTAMPCOLUMN></TIMESTAMPCOLUMN>
+        </DATAOBJECT>
+      </DATAOBJECTS>
+    </DATASOURCE>
+   </DATASOURCES>
+   <CUBE>
+    <DIMENSIONS>
+      <DIMENSION NAME="USER">
+        <ATTRIBUTES>
+          <ATTRIBUTE TYPE="Name">UserName</ATTRIBUTE>
+          <ATTRIBUTE TYPE="Name">UserLogin</ATTRIBUTE>
+        </ATTRIBUTES>
+        <HIERARCHIES></HIERARCHIES>
+        <DATASET>User</DATASET>
+      </DIMENSION>
+    </DIMENSIONS>
+    <MEASURES>
+      <MEASURE>DealVolume</MEASURE>
+      <MEASURE>DealAmt</MEASURE>
+      <MEASURE>DealPrice</MEASURE>
+    </MEASURES>
+  </CUBE>
+  <MAPPINGS>
+    <MAPPING TYPE="DIMENSION" NAME="USER">
+      <SOURCEOBJECTS>
+     <SOURCEOBJECT DATASOURCE="Nucleus" DATAOBJECT="USERS">
+    
+      <MAPPINGCOLUMNS>
+        <MAPPINGCOLUMN DATACOLUMN="UserName" ATTRIBUTE ="UserName" />
+        <MAPPINGCOLUMN DATACOLUMN="UserLogin" />
+      </MAPPINGCOLUMNS>
+       </SOURCEOBJECT>
+      </SOURCEOBJECTS>
+    </MAPPING>
+    <!--
+    <MAPPING TYPE="FACT">
+      <SOURCEOBJECTS>
+        <SOURCEOBJECT NAME="POWER_DEALS">
+          <DATASOURCE>Nucleus</DATASOURCE>
+          <DATAOBJECT>POWER_DEALS</DATAOBJECT>
+          <JOINS></JOINS>
+        </SOURCEOBJECT>
+      </SOURCEOBJECTS>
+      <LOOKUPS>
+        <LOOKUP NAME="USER" DIMENSION="USER">
+          <NATURALKEY>
+            <COLUMN>UR_TRADER</COLUMN>
+          </NATURALKEY>
+        </LOOKUP>
+      </LOOKUPS>
+      <MEASURES>
+        <MEASURE NAME="DealVolume">
+          <SOURCEOBJECT>POWER_DEALS</SOURCEOBJECT>
+          <VALUE>VOLUME</VALUE>
+          </MEASURE>
+      </MEASURES>
+    </MAPPING>-->
+  </MAPPINGS>
+</SOLUTION>

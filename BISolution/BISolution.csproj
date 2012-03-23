@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{06A363C4-4FFC-45E9-A476-8478057774B2}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WpfApplication1</RootNamespace>
+    <AssemblyName>BISolution</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SourceAnalysisOverrideSettingsFile>C:\Users\Kyle\AppData\Roaming\ICSharpCode/SharpDevelop4\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EzAPI">
+      <HintPath>..\..\..\EzAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="Konesans.Dts.CommonLibrary">
+      <HintPath>..\..\..\Konesans.Dts.CommonLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Konesans.Dts.Pipeline.ChecksumTransform">
+      <HintPath>..\..\..\Konesans.Dts.Pipeline.ChecksumTransform.dll</HintPath>
+    </Reference>
+    <Reference Include="Konesans.Dts.Pipeline.RowNumberTransform">
+      <HintPath>..\..\..\Konesans.Dts.Pipeline.RowNumberTransform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.DTSPipelineWrap">
+      <HintPath>..\..\..\Microsoft.SqlServer.DTSPipelineWrap.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SQLServer.ManagedDTS">
+      <HintPath>..\..\..\Microsoft.SQLServer.ManagedDTS.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.SQLTask">
+      <HintPath>..\..\..\Microsoft.SqlServer.SQLTask.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\bin\Tools\NUnit\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="BISolutionTests.cs" />
+    <Compile Include="Configuration\Configuration.cs" />
+    <Compile Include="Cube\ATTRIBUTE.cs" />
+    <Compile Include="Cube\CUBE.cs" />
+    <Compile Include="Cube\DIMENSION.cs" />
+    <Compile Include="Cube\MEASURE.cs" />
+    <Compile Include="DataConnection\DataConnection.cs" />
+    <Compile Include="DataConnection\DataObject2.cs" />
+    <Compile Include="DataSource\DATAOBJECT.cs" />
+    <Compile Include="DataSource\DATASOURCE.cs" />
+    <Compile Include="EzCustom\EzChecksum.cs" />
+    <Compile Include="EzCustom\EzRowCount.cs" />
+    <Compile Include="EzCustom\EzRowNumber.cs" />
+    <Compile Include="EzCustom\EzSqlTask.cs" />
+    <Compile Include="Mappings\MAPPING.cs" />
+    <Compile Include="Mappings\MAPPINGCOLUMN.cs" />
+    <Compile Include="Mappings\SOURCEOBJECT.cs" />
+    <Compile Include="Package\PACKAGE.cs" />
+    <Compile Include="Package\PACKAGE_DIM.cs" />
+    <Compile Include="Package\PACKAGE_FACT.cs" />
+    <Compile Include="Package\PACKAGE_PSA.cs" />
+    <Compile Include="Package\PACKAGE_STAGE.cs" />
+    <Compile Include="SOLUTION.cs" />
+    <Compile Include="Static\Prefixes.cs" />
+    <Compile Include="Tier\TIER.cs" />
+    <Compile Include="Tier\TIER_SSAS.cs" />
+    <Compile Include="Tier\TIER_SSIS.cs" />
+    <Compile Include="Tier\TIER_SSMS.cs" />
+    <Compile Include="Tier\TIER_SSMS_DATABASE.cs" />
+    <Compile Include="Tier\TIER_SSRS.cs" />
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BISolution.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

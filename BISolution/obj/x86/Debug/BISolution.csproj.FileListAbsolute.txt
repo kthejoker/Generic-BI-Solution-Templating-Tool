@@ -1,0 +1,60 @@
+C:\Users\Kyle\documents\visual studio 2010\Projects\BISolution\BISolution\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Kyle\documents\visual studio 2010\Projects\BISolution\BISolution\obj\x86\Debug\MainWindow.baml
+C:\Users\Kyle\documents\visual studio 2010\Projects\BISolution\BISolution\obj\x86\Debug\MainWindow.g.cs
+C:\Users\Kyle\documents\visual studio 2010\Projects\BISolution\BISolution\obj\x86\Debug\App.g.cs
+C:\Users\Kyle\documents\visual studio 2010\Projects\BISolution\BISolution\obj\x86\Debug\BISolution_Content.g.cs
+C:\Users\Kyle\documents\visual studio 2010\Projects\BISolution\BISolution\obj\x86\Debug\BISolution_MarkupCompile.cache
+C:\Users\Kyle\documents\visual studio 2010\Projects\BISolution\BISolution\obj\x86\Debug\BISolution.g.resources
+C:\Users\Kyle\documents\visual studio 2010\Projects\BISolution\BISolution\obj\x86\Debug\WpfApplication1.Properties.Resources.resources
+C:\Users\Kyle\documents\visual studio 2010\Projects\BISolution\BISolution\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Kyle\documents\visual studio 2010\Projects\BISolution\BISolution\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Kyle\documents\visual studio 2010\Projects\BISolution\BISolution\bin\Debug\BISolution.xml
+C:\Users\Kyle\documents\visual studio 2010\Projects\BISolution\BISolution\bin\Debug\BISolution.exe
+C:\Users\Kyle\documents\visual studio 2010\Projects\BISolution\BISolution\bin\Debug\BISolution.pdb
+C:\Users\Kyle\documents\visual studio 2010\Projects\BISolution\BISolution\obj\x86\Debug\BISolution.exe
+C:\Users\Kyle\documents\visual studio 2010\Projects\BISolution\BISolution\obj\x86\Debug\BISolution.pdb
+C:\Users\Kyle\Documents\Visual Studio 2010\Projects\BISolution\BISolution\bin\Debug\BISolution.exe.config
+C:\Users\Kyle\Documents\Visual Studio 2010\Projects\BISolution\BISolution\bin\Debug\EzAPI.dll
+D:\4.2\Projects\BISolution\bin\Debug\BISolution.xml
+D:\4.2\Projects\BISolution\bin\Debug\BISolution.exe.config
+D:\4.2\Projects\BISolution\bin\Debug\BISolution.exe
+D:\4.2\Projects\BISolution\bin\Debug\BISolution.pdb
+D:\4.2\Projects\BISolution\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\4.2\Projects\BISolution\obj\x86\Debug\MainWindow.baml
+D:\4.2\Projects\BISolution\obj\x86\Debug\MainWindow.g.cs
+D:\4.2\Projects\BISolution\obj\x86\Debug\App.g.cs
+D:\4.2\Projects\BISolution\obj\x86\Debug\BISolution_Content.g.cs
+D:\4.2\Projects\BISolution\obj\x86\Debug\BISolution_MarkupCompile.cache
+D:\4.2\Projects\BISolution\obj\x86\Debug\BISolution.g.resources
+D:\4.2\Projects\BISolution\obj\x86\Debug\WpfApplication1.Properties.Resources.resources
+D:\4.2\Projects\BISolution\obj\x86\Debug\GenerateResource.read.1.tlog
+D:\4.2\Projects\BISolution\obj\x86\Debug\GenerateResource.write.1.tlog
+D:\4.2\Projects\BISolution\obj\x86\Debug\BISolution.exe
+D:\4.2\Projects\BISolution\obj\x86\Debug\BISolution.pdb
+E:\4.2\Projects\BISolution\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\4.2\Projects\BISolution\obj\x86\Debug\MainWindow.baml
+E:\4.2\Projects\BISolution\obj\x86\Debug\MainWindow.g.cs
+E:\4.2\Projects\BISolution\obj\x86\Debug\App.g.cs
+E:\4.2\Projects\BISolution\obj\x86\Debug\BISolution_Content.g.cs
+E:\4.2\Projects\BISolution\obj\x86\Debug\BISolution_MarkupCompile.cache
+E:\4.2\Projects\BISolution\obj\x86\Debug\BISolution.g.resources
+E:\4.2\Projects\BISolution\obj\x86\Debug\WpfApplication1.Properties.Resources.resources
+E:\4.2\Projects\BISolution\obj\x86\Debug\GenerateResource.read.1.tlog
+E:\4.2\Projects\BISolution\obj\x86\Debug\GenerateResource.write.1.tlog
+E:\4.2\Projects\BISolution\obj\x86\Debug\BISolution.exe
+E:\4.2\Projects\BISolution\obj\x86\Debug\BISolution.pdb
+E:\4.2\Projects\BISolution\bin\Debug\BISolution.xml
+E:\4.2\Projects\BISolution\bin\Debug\BISolution.exe.config
+E:\4.2\Projects\BISolution\bin\Debug\BISolution.exe
+E:\4.2\Projects\BISolution\bin\Debug\BISolution.pdb
+E:\4.2\Projects\BISolution\bin\Debug\Konesans.Dts.Pipeline.RowNumberTransform.dll
+E:\4.2\Projects\BISolution\bin\Debug\Microsoft.SqlServer.DTSPipelineWrap.dll
+E:\4.2\Projects\BISolution\bin\Debug\Microsoft.SQLServer.ManagedDTS.dll
+E:\4.2\Projects\BISolution\bin\Debug\Microsoft.SqlServer.SQLTask.dll
+E:\4.2\Projects\BISolution\bin\Debug\nunit.framework.dll
+E:\4.2\Projects\BISolution\obj\x86\Debug\GenerateResource-ResGen.read.1.tlog
+E:\4.2\Projects\BISolution\obj\x86\Debug\GenerateResource-ResGen.write.1.tlog
+E:\4.2\Projects\BISolution\bin\Debug\EzAPI.dll
+D:\4.2\Projects\BISolution\bin\Debug\nunit.framework.dll
+D:\4.2\Projects\BISolution\obj\x86\Debug\GenerateResource-ResGen.read.1.tlog
+D:\4.2\Projects\BISolution\obj\x86\Debug\GenerateResource-ResGen.write.1.tlog
