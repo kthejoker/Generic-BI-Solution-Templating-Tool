@@ -8,7 +8,9 @@ using Microsoft.SqlServer.Dts.Runtime;
 using Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask;
 using WpfApplication1.Tier;
 using WpfApplication1.DataSource;
+using WpfApplication1.DataConnection;
 using WpfApplication1.Static;
+using WpfApplication1.Cube;
 
 namespace WpfApplication1.Package
 {
@@ -19,6 +21,7 @@ namespace WpfApplication1.Package
         public SOLUTION s;
         public TIER t;
         public DATAOBJECT d;
+        public DIMENSION dim;
         public string packageType;
 
         public void addVariable(string VariableName, int DefaultValue = 0, bool readOnly = false)
@@ -151,6 +154,12 @@ VALUES ('""+ (DT_STR, 25, 1252) @[System::ContainerStartTime] + ""',	'OnPostExec
 
             this.d = d;
             this.s = d.ds.s;
+            this.t = s.getCurrentTier();
+        }
+        
+        public PACKAGE(DIMENSION dim) {
+          	this.dim = dim;
+            this.s = dim.ds.s;
             this.t = s.getCurrentTier();
         }
 

@@ -7,50 +7,18 @@ using System.Data.SqlClient;
 
 namespace WpfApplication1.DataSource
 {
-    public class DATAOBJECT
+	public class DATAOBJECT : DataConnection.DataObject2
     {
-        public DATASOURCE ds;
 
-          public DATAOBJECT()
-        {
-        }
+		
 
-        public DATAOBJECT(DATASOURCE ds)
-
-        {
-            this.ds = ds;
-            
-        }
-
-        public List<WpfApplication1.DataConnection.DataConnection.Column> getColumns()
+        new public List<WpfApplication1.DataConnection.DataConnection.Column> getColumns()
         {
             return this.ds.DataConnection.getColumns(this.SOURCEQUERY);
             
         }
 
-        public void createTable(string databaseLayer, bool dropExisting = false)
-        {
-            DataConnection.DataConnection dc = this.ds.s.getCurrentTier().getDatabaseByLayer(databaseLayer).DataConnection;
-
-            string tableName = Prefixes.Prefix[databaseLayer] + this.ds.NAME + "_" + this.NAME;
-            string fixedColumns = Columns.Column[databaseLayer];
-            string tableColumns = "";
-            if (!databaseLayer.Equals("MATCH"))
-            {
-                foreach (WpfApplication1.DataConnection.DataConnection.Column c in this.getColumns())
-                {
-                    tableColumns = tableColumns + c.convertToSQL() + ", ";
-                }
-            }
-            string columnInfo = tableColumns + fixedColumns;
-
-            if (dropExisting)
-            {
-                dc.dropTable(tableName);
-            }
-            dc.createTable(tableName, columnInfo);
-
-        }
+     
 
         public void createStageTable(bool dropExisting = false)
         {
@@ -70,11 +38,7 @@ namespace WpfApplication1.DataSource
 
         }
 
-       
-
-        [System.Xml.Serialization.XmlAttribute("NAME")]
-        public string NAME { get; set; }
-
+    
         [System.Xml.Serialization.XmlAttribute("TYPE")]
         public string TYPE { get; set; }
 
@@ -84,7 +48,6 @@ namespace WpfApplication1.DataSource
 
         [System.Xml.Serialization.XmlElement("MATCHDATASET")]
         public string MATCHDATASET { get; set; }
-
 
         [System.Xml.Serialization.XmlElement("LOADTYPE")]
         public string LOADTYPE { get; set; }

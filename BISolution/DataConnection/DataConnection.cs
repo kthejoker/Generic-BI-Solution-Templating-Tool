@@ -17,7 +17,7 @@ namespace WpfApplication1.DataConnection
 
         public SqlConnection connect()
         {
-            SqlConnection myConnection = new SqlConnection(String.Format(@"server={0};database={1};integrated security=SSPI;", this.SERVERNAME, this.DATABASENAME));
+            SqlConnection myConnection = new SqlConnection(String.Format(@"server={0};database={1};user=bisolution;password=bisolution;", this.SERVERNAME, this.DATABASENAME));
             return myConnection;
         }
 

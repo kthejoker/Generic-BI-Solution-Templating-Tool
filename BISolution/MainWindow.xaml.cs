@@ -61,7 +61,7 @@ namespace WpfApplication1
 
             foreach (DIMENSION dim in this.SOLUTION.CUBE.DIMENSIONS)
             {
-               dim.createDimTable(true);
+               dim.createTable(dim.DATABASELAYER, true);
             }
 
             MessageBox.Show(this.SOLUTION.MAPPINGS[0].SOURCEOBJECTS[0].MAPPINGCOLUMNS[0].DATACOLUMN);

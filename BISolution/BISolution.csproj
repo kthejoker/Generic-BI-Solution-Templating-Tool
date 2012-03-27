@@ -39,7 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EzAPI">
-      <HintPath>..\..\..\EzAPI.dll</HintPath>
+      <HintPath>..\..\..\..\..\EzAPI.dll</HintPath>
     </Reference>
     <Reference Include="Konesans.Dts.CommonLibrary">
       <HintPath>..\..\..\Konesans.Dts.CommonLibrary.dll</HintPath>
@@ -77,7 +77,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BISolutionTests.cs" />
     <Compile Include="Configuration\Configuration.cs" />
     <Compile Include="Cube\ATTRIBUTE.cs" />
     <Compile Include="Cube\CUBE.cs" />
@@ -101,6 +100,8 @@
     <Compile Include="Package\PACKAGE_STAGE.cs" />
     <Compile Include="SOLUTION.cs" />
     <Compile Include="Static\Prefixes.cs" />
+    <Compile Include="Tests\BISolutionTests.cs" />
+    <Compile Include="Tests\DIMENSIONTests.cs" />
     <Compile Include="Tier\TIER.cs" />
     <Compile Include="Tier\TIER_SSAS.cs" />
     <Compile Include="Tier\TIER_SSIS.cs" />
@@ -150,6 +151,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Tests" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
