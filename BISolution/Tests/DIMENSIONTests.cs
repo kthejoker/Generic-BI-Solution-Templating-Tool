@@ -6,9 +6,9 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
-using System;
+
 using WpfApplication1.Cube;
-using NUnit.Framework;
+
 
 namespace WpfApplication1.Tests
 {
@@ -16,12 +16,36 @@ namespace WpfApplication1.Tests
 	/// Test fixture for DIMENSION class.
 	/// </summary>
 
+	using System;
+	using NUnit.Framework;
+	using System.Xml;
+	using System.Xml.Serialization;
+	
+	
+
 	[TestFixture]
 	public class DIMENSIONTests
 	{
+		public SOLUTION s;
+		public DIMENSION dimension;
 		
-		[Test] public void MyTest() {
-			DIMENSION Dimension = new DIMENSION();
+		[TestFixtureSetUp] public void DimensionCreation() {
+			string solutionFile = @"BISolution.xml";
+			BISolution solution = new BISolution(solutionFile);
+            XmlReader solutionXML = XmlReader.Create(solutionFile);
+            XmlSerializer ser = new XmlSerializer(typeof(SOLUTION));
+           	this.s = (SOLUTION)ser.Deserialize(solutionXML);
+           	this.dimension = this.s.CUBE.getDimensionByName("USER");
+			
+		}
+		
+		[Test] public void CheckName() {
+			Assert.AreEqual(this.dimension.NAME, "USER");
+		}
+		
+		//TODO Dimension tests
+		
+		[SetUp] public void DimensionSetup() {
 			
 		}
 

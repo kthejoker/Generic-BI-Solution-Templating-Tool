@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using WpfApplication1.Static;
-using WpfApplication1.DataConnection;
+using DataConnection = WpfApplication1.DataConnection.DataConnection;
+
+
 
 namespace WpfApplication1.Cube
 {
@@ -27,10 +29,10 @@ namespace WpfApplication1.Cube
         }
 
 
-        new public List<WpfApplication1.DataConnection.DataConnection.Column> getColumns() 
+        new public List<DataConnection.DataConnection.Column> getColumns() 
         {
 
-            List<WpfApplication1.DataConnection.DataConnection.Column> columns = new List<WpfApplication1.DataConnection.DataConnection.Column>();
+            List<DataConnection.DataConnection.Column> columns = new List<DataConnection.DataConnection.Column>();
             columns.Add(new DataConnection.DataConnection.Column(this.NAME + "_ID", "int"));
             foreach (ATTRIBUTE a in this.ATTRIBUTES) {
             	columns.Add(a.c);

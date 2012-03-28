@@ -37,6 +37,13 @@ namespace WpfApplication1.Cube
             get;
             set;
         }
+        
+        public DIMENSION getDimensionByName(string dimensionName) {
+        	return Array.Find(this.DIMENSIONS, delegate(DIMENSION tempDimension)
+            {
+                return tempDimension.NAME == dimensionName;
+            });
+        }
 
     }
 }

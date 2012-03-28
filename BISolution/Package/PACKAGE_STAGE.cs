@@ -29,7 +29,6 @@ namespace WpfApplication1.Package
             this.addVariable("Audit::RowsInserted");
             this.addVariable("Audit::RowsUpdated");
             this.addVariable("Audit::RowsDeleted");
-            //System.Windows.MessageBox.Show(this.Conns["Commercial_STG"].ServerName);
 
             //Clear stage table for clean full load of source data
             EzExecuteSQLTask TruncateStageTable = new EzExecuteSQLTask(this);
@@ -45,7 +44,6 @@ namespace WpfApplication1.Package
             this.addConfigurations();
             this.addLogging(ExtractAllRecords.Name);
         }
-
 
     }
 

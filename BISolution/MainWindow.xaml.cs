@@ -22,6 +22,7 @@ using WpfApplication1.DataSource;
 using WpfApplication1.Package;
 using WpfApplication1.Cube;
 using WpfApplication1.Static;
+using WpfApplication1.Mappings;
 
 namespace WpfApplication1
 {
@@ -62,11 +63,14 @@ namespace WpfApplication1
             foreach (DIMENSION dim in this.SOLUTION.CUBE.DIMENSIONS)
             {
                dim.createTable(dim.DATABASELAYER, true);
+               PACKAGE_DIM Package_DIM = new PACKAGE_DIM(dim);
             }
 
             MessageBox.Show(this.SOLUTION.MAPPINGS[0].SOURCEOBJECTS[0].MAPPINGCOLUMNS[0].DATACOLUMN);
+            
+          
 
-            //foreach SourceObject in MAPPING create DIM package
+          
          
            
             return 0;

@@ -114,7 +114,7 @@ namespace WpfApplication1.Package
 
         public string fileName()
         {
-            return String.Format(@"C:\sandbox\{0}.dtsx",this.tableName());
+            return String.Format(@"E:\sandbox\{0}.dtsx",this.tableName());
         }
 
         public void addLogging(string Executable)
