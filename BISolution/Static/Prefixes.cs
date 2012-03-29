@@ -9,7 +9,8 @@ namespace WpfApplication1.Static
             { "STAGE", "stg" },
             { "PSA", "psa" },
             { "MATCH", "match" } ,
-            {"DIM", "dim"}
+            {"DIM", "dim"},
+            {"FACT", "fact"}
         };
 
       

@@ -41,7 +41,6 @@ namespace WpfApplication1
             //foreach object
                        // insert dataset if new
             //insert all meta table if new
-            //create fact/dim package
 
             TIER t = this.SOLUTION.getTier(tierToDeploy);
             //foreach (DATASOURCE ds in this.SOLUTION.DATASOURCES)
@@ -64,16 +63,22 @@ namespace WpfApplication1
             {
                dim.createTable(dim.DATABASELAYER, true);
                PACKAGE_DIM Package_DIM = new PACKAGE_DIM(dim);
+               //TODO add package to project
+               
+            }
+            
+            //TODO create fact table if does not exist
+            MAPPING[] factMappings = Array.FindAll(this.SOLUTION.MAPPINGS, delegate(MAPPING tempMapping) {
+                                            return tempMapping.TYPE == "FACT";
+                                                });
+         
+            foreach (MAPPING factMapping in factMappings) {
+            
+            
+            PACKAGE_FACT Package_FACT = new PACKAGE_FACT(factMapping);
             }
 
-            MessageBox.Show(this.SOLUTION.MAPPINGS[0].SOURCEOBJECTS[0].MAPPINGCOLUMNS[0].DATACOLUMN);
-            
-          
-
-          
-         
-           
-            return 0;
+        return 0;
         }
 
         public BISolution(string solutionFile)

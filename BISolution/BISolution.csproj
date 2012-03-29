@@ -81,6 +81,7 @@
     <Compile Include="Cube\ATTRIBUTE.cs" />
     <Compile Include="Cube\CUBE.cs" />
     <Compile Include="Cube\DIMENSION.cs" />
+    <Compile Include="Cube\FACT.cs" />
     <Compile Include="Cube\MEASURE.cs" />
     <Compile Include="DataConnection\DataConnection.cs" />
     <Compile Include="DataConnection\DataObject2.cs" />

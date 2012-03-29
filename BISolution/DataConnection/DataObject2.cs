@@ -97,6 +97,7 @@ namespace WpfApplication1.DataConnection
                 this.dc.dropTable(tableName);
             }
             this.dc.createTable(tableName, columnInfo);
+            //todo update META table with new info
 
         }   
 		   

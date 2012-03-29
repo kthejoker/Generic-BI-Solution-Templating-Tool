@@ -11,6 +11,7 @@ using WpfApplication1.DataSource;
 using WpfApplication1.DataConnection;
 using WpfApplication1.Static;
 using WpfApplication1.Cube;
+using WpfApplication1.Mappings;
 
 namespace WpfApplication1.Package
 {
@@ -22,6 +23,7 @@ namespace WpfApplication1.Package
         public TIER t;
         public DATAOBJECT d;
         public DIMENSION dim;
+        public MAPPING m;
         public string packageType;
 
         public void addVariable(string VariableName, int DefaultValue = 0, bool readOnly = false)
@@ -106,6 +108,9 @@ namespace WpfApplication1.Package
                 case "DIM":
                     tableName = String.Format("{0}_{1}", Prefixes.Prefix[packageType], this.d.NAME);
                     break;
+              	case "FACT":
+                    tableName = String.Format("{0}_{1}", Prefixes.Prefix[packageType], this.m.NAME);
+                    break;
                 default:
                     tableName = String.Format("{0}_{1}_{2}", Prefixes.Prefix[packageType], this.d.ds.NAME, this.d.NAME);
                     break;
@@ -163,6 +168,12 @@ VALUES ('""+ (DT_STR, 25, 1252) @[System::ContainerStartTime] + ""',	'OnPostExec
             this.s = dim.cube.s;
             this.t = s.getCurrentTier();
         }
+        
+        public PACKAGE(MAPPING mapping) {
+                   this.m = mapping;  
+					this.s = m.s;  
+					this.t = s.getCurrentTier();
+                                       }
 
     }
 }
