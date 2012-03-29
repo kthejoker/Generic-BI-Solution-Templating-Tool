@@ -9,6 +9,7 @@ using Microsoft.SqlServer.Dts.Runtime;
 using Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask;
 using WpfApplication1.Cube;
 using WpfApplication1.EzCustom;
+using WpfApplication1.Mappings;
 
 namespace WpfApplication1.Package
 {
@@ -34,6 +35,7 @@ namespace WpfApplication1.Package
             this.addVariable("Audit::RowsInserted");
             this.addVariable("Audit::RowsUpdated");
             this.addVariable("Audit::RowsDeleted");
+            this.addVariable("Audit::LastRunDate");
             
 
             // Get last run date to compare against active date.
@@ -44,7 +46,8 @@ namespace WpfApplication1.Package
             GetLastRunDate.SqlStatementSource = "select 1";
             GetLastRunDate.Connection = this.Conns["RUN"];
 
-            EzDataFlow UpdateDimension = new DimDataFlow(this, this);
+            //TODO foreach unionable source object, create data flow and attach
+            EzDataFlow UpdateDimension = new DimDataFlow(this, this, this.dim.MAPPING.SOURCEOBJECTS[0]);
             UpdateDimension.Name = "Update Dimension";
             UpdateDimension.AttachTo(GetLastRunDate);
 
@@ -59,32 +62,44 @@ namespace WpfApplication1.Package
     {
     	
     	 public PACKAGE_DIM p;
+    	 public SOURCEOBJECT so;
     	
-    	public DimDataFlow(EzContainer parent, PACKAGE_DIM p)  : base(parent)
+    	public DimDataFlow(EzContainer parent, PACKAGE_DIM p, SOURCEOBJECT so)  : base(parent)
         {
             this.p = p;
+            this.so = so;
             
             EzOleDbSource Source = new EzOleDbSource(this);
             Source.Connection = p.Conns["Source"];
-            //TODO build custom query from dimension object
-            Source.SqlCommand = "select * from psa_Nucleus_Users where ActiveFlag = 'Y' and CreatedDate > '01-01-1900'";
-            //TODO get name from mapping object
-            Source.Name = "psa_Nucleus_Users";
+            
+
+            Source.SqlCommand = String.Format("select * from {0} where ActiveFlag = 'Y' and CreatedDate > '01-01-1900'", so.DATAOBJECT.tableName("PSA"));
+            Source.Name = so.DATAOBJECT.tableName("PSA");
             
             EzDerivedColumn DeriveAttributes = new EzDerivedColumn(this);
             DeriveAttributes.AttachTo(Source);
             DeriveAttributes.Name = "Derive Attributes";
             //TODO for each mapping column add attribute expression
+            foreach (MAPPINGCOLUMN mappingColumn in so.MAPPINGCOLUMNS) {
+            	if (mappingColumn.ATTRIBUTE == null) {
+            		mappingColumn.ATTRIBUTE = mappingColumn.DATACOLUMN;
+            	}
+            	//TODO based on attribute type determine what sort of SSIS-ifying the data column needs
+               DeriveAttributes.Expression[mappingColumn.ATTRIBUTE] = "(DT_STR,150,1252)\"" + mappingColumn.DATACOLUMN + "\"";
+            }
             
             EzConditionalSplit ActionCode = new EzConditionalSplit(this);
             ActionCode.AttachTo(DeriveAttributes);
-            EzConditionalSplit["case1"] = "ActionCode == 'UPDATE'";
-            EzConditionalSplit["case2"] = "ActionCode == 'INSERT'";
+            ActionCode.Condition["case1"] = "ActionCode == 'UPDATE'";
+            ActionCode.Condition["case2"] = "ActionCode == 'INSERT'";
             
-            RowsMatched = new EzRowCount(this);
+            EzRowCount RowsMatched = new EzRowCount(this);
             RowsMatched.Name = "Rows Matched";
             RowsMatched.VariableName = "Audit::RowsMatched";
             RowsMatched.AttachTo(ActionCode, 0, 0);
+            
+            EzOleDbCommand UpdateDimension = new EzOleDbCommand(this);
+            UpdateDimension.AttachTo(RowsMatched);
             
             EzRowCount RowsInserted = new EzRowCount(this);
             RowsInserted.Name = "Rows Inserted";
@@ -99,16 +114,6 @@ namespace WpfApplication1.Package
             InsertedDestination.LinkAllInputsToOutputs();
             InsertedDestination.ReinitializeMetaData();
 
-            
-//              MAPPING[] dimensionMappings = Array.FindAll(this.SOLUTIONS.MAPPINGS, delegate(MAPPING tempMapping)
-//            {
-//                return tempMapping.TYPE == "Dimension";
-//            });
-//           
-//            
-//            foreach (MAPPING m in dimensionMappings) {
-//            	m.
-//            }
     	}
 	}
 }

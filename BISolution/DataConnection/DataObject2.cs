@@ -23,12 +23,16 @@ namespace WpfApplication1.DataConnection
 		
 		private string _DATABASELAYER;
 		
-		    [System.Xml.Serialization.XmlIgnore]
+		[System.Xml.Serialization.XmlIgnore]
         public CUBE cube;
 		
-		        [System.Xml.Serialization.XmlIgnore]
+		[System.Xml.Serialization.XmlIgnore]
         private WpfApplication1.DataConnection.DataConnection DataConnection_field;
         
+        [System.Xml.Serialization.XmlAttribute("NAME")]
+        public string NAME { get; set; }
+		
+		public DATASOURCE ds;
         public string OBJECTTYPE;
         public string DATABASELAYER {get {return _DATABASELAYER;} set {
         		if (this.DataConnection_field != null) {
@@ -45,7 +49,7 @@ namespace WpfApplication1.DataConnection
                 if (this.DataConnection_field == null)
                 {
                 	if (this.OBJECTTYPE == "DIMENSION") {
-                    	this.DataConnection_field = this.cube.s.getCurrentTier().getDatabaseByLayer("DIM").DataConnection;
+                    	this.DataConnection_field = this.cube.s.getCurrentTier().getDatabaseByLayer(this.DATABASELAYER).DataConnection;
                 	}
                 	else {
                 		this.DataConnection_field = this.ds.s.getCurrentTier().getDatabaseByLayer(this.DATABASELAYER).DataConnection;
@@ -64,17 +68,8 @@ namespace WpfApplication1.DataConnection
 			return columns;
                            
         }
-		
-        [System.Xml.Serialization.XmlAttribute("NAME")]
-        public string NAME { get; set; }
-		
-		    public DATASOURCE ds;
-		
 
-           
-         
-		   
-		        public void createTable(string DatabaseLayer = "", bool dropExisting = false)
+		public void createTable(string DatabaseLayer = "", bool dropExisting = false)
         {
 
         	if (DatabaseLayer.Equals("")) { DatabaseLayer = this.DATABASELAYER;}

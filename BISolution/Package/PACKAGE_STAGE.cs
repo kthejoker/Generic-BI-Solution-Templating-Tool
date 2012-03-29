@@ -21,7 +21,7 @@ namespace WpfApplication1.Package
             this.addConnection("Commercial_STG", this.t.SSMS.SERVERNAME, this.t.getDatabaseByLayer("STAGE").NAME);
             this.addConnection("Commercial_PSA", this.t.SSMS.SERVERNAME, this.t.getDatabaseByLayer("PSA").NAME);
             this.addConnection("Commercial_RUN", this.t.SSMS.SERVERNAME, this.t.getDatabaseByLayer("RUN").NAME);
-            this.addConnection("Commercial_MATCH", this.t.SSMS.SERVERNAME, this.t.getDatabaseByLayer("MATCH").NAME);
+            this.addConnection("MATCH", this.t.SSMS.SERVERNAME, this.t.getDatabaseByLayer("MATCH").NAME);
             this.addConnection("Commercial_META", this.t.SSMS.SERVERNAME, this.t.getDatabaseByLayer("META").NAME);
             this.addConnection("Source", this.d.ds.SERVERNAME, this.d.ds.DATABASENAME);
 
@@ -109,7 +109,7 @@ namespace WpfApplication1.Package
             GetDatasetID.Name = "Get Dataset ID";
             GetDatasetID.AttachTo(CreateNaturalKey);
             GetDatasetID.SetJoinCols("DataSetName,DataSetName");
-            GetDatasetID.OleDbConnection = this.p.Conns["Commercial_MATCH"];
+            GetDatasetID.OleDbConnection = this.p.Conns["MATCH"];
             GetDatasetID.SqlCommand = "select DataSetName, DataSetID from DataSets";
             GetDatasetID.SetCopyOverwriteCols("DataSetID,DataSetID");
             Console.WriteLine("DataSet ID Acquired ...");
@@ -137,7 +137,7 @@ namespace WpfApplication1.Package
             AssignMatchKey.Name = "Assign Match Key";
             AssignMatchKey.AttachTo(GenerateChecksum);
             AssignMatchKey.SetJoinCols("NaturalKey,NaturalKey");
-            AssignMatchKey.OleDbConnection = p.Conns["Commercial_MATCH"];
+            AssignMatchKey.OleDbConnection = p.Conns["MATCH"];
             AssignMatchKey.SqlCommand = "SELECT NaturalKey, MatchKey from " + this.p.tableName("MATCH");
             AssignMatchKey.SetCopyOverwriteCols("MatchKey,MatchKey");
             AssignMatchKey.NoMatchBehavor = NoMatchBehavior.SendToNoMatchOutput;
@@ -166,7 +166,7 @@ namespace WpfApplication1.Package
             RetrieveLastMatchKey.Name = "Retrieve Last MatchKey";
             RetrieveLastMatchKey.AttachTo(RowsInserted);
             RetrieveLastMatchKey.SetJoinCols("DataSetID,DataSetID");
-            RetrieveLastMatchKey.OleDbConnection = this.p.Conns["Commercial_MATCH"];
+            RetrieveLastMatchKey.OleDbConnection = this.p.Conns["MATCH"];
             RetrieveLastMatchKey.SqlCommand = String.Format("SELECT DataSetID, MAX(MatchKey) as MaxMatchKey FROM {0} GROUP BY DataSetID", this.p.tableName("MATCH"));
             RetrieveLastMatchKey.SetCopyOverwriteCols("MaxMatchKey,MaxMatchKey");
 
@@ -195,7 +195,7 @@ namespace WpfApplication1.Package
             MasterMatch = new EzOleDbDestination(this);
             MasterMatch.Name = this.p.tableName("MATCH");
             MasterMatch.AttachTo(MultiCast, 1, 0);
-            MasterMatch.Connection = p.Conns["Commercial_MATCH"];
+            MasterMatch.Connection = p.Conns["MATCH"];
             MasterMatch.ReinitializeMetaData();
             MasterMatch.Table = this.p.tableName("MATCH");
             MasterMatch.LinkAllInputsToOutputs();

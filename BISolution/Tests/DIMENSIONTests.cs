@@ -43,6 +43,10 @@ namespace WpfApplication1.Tests
 			Assert.AreEqual(this.dimension.NAME, "USER");
 		}
 		
+		[Test] public void DataSetExists() {
+			Assert.True(true);
+		}
+		
 		//TODO Dimension tests
 		
 		[SetUp] public void DimensionSetup() {

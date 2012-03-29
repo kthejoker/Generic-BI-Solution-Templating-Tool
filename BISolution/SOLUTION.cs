@@ -13,7 +13,8 @@ namespace WpfApplication1
     public class SOLUTION
     {
 
-        private DATASOURCE[] dataSourceField;
+        private DATASOURCE[] _dataSourceField;
+        private MAPPING[] _mappingField;
         private TIER currentTier;
         private CUBE CUBE_field;
 
@@ -27,14 +28,14 @@ namespace WpfApplication1
         [System.Xml.Serialization.XmlArrayItemAttribute("DATASOURCE", typeof(DATASOURCE), Form = System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable = false)]
         public DATASOURCE[] DATASOURCES
         {
-            get { return dataSourceField; }
+            get { return _dataSourceField; }
             set
             {
                 foreach (DATASOURCE ds in value)
                 {
                     ds.s = this;
                 }
-                dataSourceField = value;
+                _dataSourceField = value;
             }
         }
 
@@ -45,8 +46,15 @@ namespace WpfApplication1
         [System.Xml.Serialization.XmlArrayItemAttribute("MAPPING", typeof(MAPPING), Form = System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable = false)]
         public MAPPING[] MAPPINGS
         {
-            get;
-            set;
+             get { return _mappingField; }
+            set
+            {
+                foreach (MAPPING m in value)
+                {
+                    m.s = this;
+                }
+                _mappingField = value;
+            }
         }
 
         public TIER getTier(string tierName)
@@ -62,6 +70,25 @@ namespace WpfApplication1
         public TIER getCurrentTier()
         {
             return this.currentTier;
+        }
+        
+        public MAPPING getMapping(string mappingName, string mappingType) {
+        	MAPPING M = Array.Find(this.MAPPINGS, delegate(MAPPING tempMapping) 
+        	{
+        	  return (tempMapping.NAME == mappingName && tempMapping.TYPE == mappingType);
+        	});
+        	return M;
+        }
+        
+        public DATAOBJECT getDataObject(string dataobjectDataSourceName, string dataobjectDataObjectName) {
+        	DATASOURCE DS = Array.Find(this.DATASOURCES, delegate(DATASOURCE tempDataSource) {
+        	                           	return tempDataSource.NAME == dataobjectDataSourceName;
+        	                           });
+        	
+        	DATAOBJECT D = Array.Find(DS.DATAOBJECTS, delegate(DATAOBJECT tempDataObject) {
+        	                          	return tempDataObject.NAME == dataobjectDataObjectName;
+        	                          });
+        	return D;
         }
 
         [System.Xml.Serialization.XmlIgnore]

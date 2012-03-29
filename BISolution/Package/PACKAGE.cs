@@ -26,6 +26,7 @@ namespace WpfApplication1.Package
 
         public void addVariable(string VariableName, int DefaultValue = 0, bool readOnly = false)
         {
+        	//TODO allow other variable types besides integers
             string[] nameSpace = VariableName.Split(new string[] { "::" }, StringSplitOptions.None);
             this.Variables.Add(nameSpace[1], readOnly, nameSpace[0], DefaultValue);
             //TODO Scope in Variables window shows Class ID instead of namespace's name
@@ -159,7 +160,7 @@ VALUES ('""+ (DT_STR, 25, 1252) @[System::ContainerStartTime] + ""',	'OnPostExec
         
         public PACKAGE(DIMENSION dim) {
           	this.dim = dim;
-            this.s = dim.ds.s;
+            this.s = dim.cube.s;
             this.t = s.getCurrentTier();
         }
 
