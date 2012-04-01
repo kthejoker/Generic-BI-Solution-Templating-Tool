@@ -90,6 +90,13 @@ namespace WpfApplication1
         	                          });
         	return D;
         }
+        
+        public DIMENSION getDimension(string dimensionName) {
+        	DIMENSION DIM = Array.Find(this.CUBE.DIMENSIONS, delegate(DIMENSION tempDimension) {
+        	                           	return tempDimension.NAME == dimensionName;
+        	                           });
+        	return DIM;
+        }
 
         [System.Xml.Serialization.XmlIgnore]
         public List<DATASOURCE> DATASOURCEList { get { return new List<DATASOURCE>(DATASOURCES); } }

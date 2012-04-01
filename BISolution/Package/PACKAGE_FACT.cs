@@ -12,6 +12,9 @@ namespace WpfApplication1.Package
 	class PACKAGE_FACT : PACKAGE
     {
 		
+		public override string tableName() {
+			return String.Format("{0}_{1}", this.packageType, this.s.NAME);
+		}
 		
 		public PACKAGE_FACT(MAPPING m) : base(m) {
 			this.packageType = "FACT";
@@ -48,6 +51,9 @@ namespace WpfApplication1.Package
 		}
     }
 	
+	            class WrapperObject
+	            { public EzComponent LastStep ;}
+	
 	class FactDataFlow : EzDataFlow
     {
     	
@@ -59,14 +65,26 @@ namespace WpfApplication1.Package
             this.p = p;
             this.so = so;
             
+            p.m.SOURCEOBJECTS[0].
+            
             EzOleDbSource Source = new EzOleDbSource(this);
             Source.Connection = p.Conns["Source"];
 			//TODO correct query
             Source.SqlCommand = String.Format("select * from {0} where ActiveFlag = 'Y' and CreatedDate > '01-01-1900'", so.DATAOBJECT.tableName("PSA"));
+            Source.
             Source.Name = p.m.NAME;
             
+
+
+
+WrapperObject A = new WrapperObject();
+A.LastStep = (EzComponent) Source;
+
+            
+            
+            //TODO for each lookup, write lookup query, output
             EzLookup Lookup_1 = new EzLookup(this);
-            Lookup_1.AttachTo(Source);
+            Lookup_1.AttachTo(A.LastStep);
             
             EzRowCount RowsInserted = new EzRowCount(this);
             RowsInserted.Name = "Rows Inserted";

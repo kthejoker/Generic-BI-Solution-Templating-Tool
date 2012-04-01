@@ -16,6 +16,9 @@ namespace WpfApplication1.DataSource
 
         [System.Xml.Serialization.XmlElement("SOURCEQUERY")]
         public string SOURCEQUERY { get; set; }
+        
+                [System.Xml.Serialization.XmlElement("DIMENSIONNAME")]
+        public string DIMENSIONNAME { get; set; }
 
         [System.Xml.Serialization.XmlElement("MATCHDATASET")]
         public string MATCHDATASET { get; set; }
@@ -39,6 +42,12 @@ namespace WpfApplication1.DataSource
         {
             return this.ds.DataConnection.getColumns(this.SOURCEQUERY);
             
+        }
+        
+        public void addDataSet() 
+        {
+        	//TODO stored procedure
+        	this.dc.runQuery("");
         }
 
         public void createStageTable(bool dropExisting = false)

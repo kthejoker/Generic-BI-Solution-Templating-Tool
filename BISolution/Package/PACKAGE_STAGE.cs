@@ -74,12 +74,25 @@ namespace WpfApplication1.Package
 
         public string getNaturalKeyColumnName()
         {
-            return "(DT_STR,150,1252)\"" + p.d.NATURALKEYCOLUMNS[0] + "\"";
+        	
+        	string NaturalKeyColumnName = "";
+        	foreach (string NATURALKEYCOLUMN in this.p.d.NATURALKEYCOLUMNS) {
+        		NaturalKeyColumnName = NaturalKeyColumnName + String.Format("(DT_STR,150,1252)\"{0}\" + \"||\"", NATURALKEYCOLUMN);
+        	}
+        	//TODO strip trailing pipes
+            return NaturalKeyColumnName;
         }
 
         public string getNaturalKey()
         {
-            return "(DT_STR,150,1252)" + this.p.d.NATURALKEYCOLUMNS[0];
+        	
+        	string NaturalKey = "";
+        	foreach (string NATURALKEYCOLUMN in this.p.d.NATURALKEYCOLUMNS) {
+        		NaturalKey = NaturalKey + String.Format("(DT_STR,150,1252){0} + \"||\"", NATURALKEYCOLUMN);
+        	}
+        	//TODO strip trailing pipes
+            return NaturalKey;
+            
         }
 
         public StageDataFlow(EzContainer parent, PACKAGE_STAGE p)
@@ -102,6 +115,7 @@ namespace WpfApplication1.Package
             CreateNaturalKey.Expression["NaturalKeyColumnName"] = this.getNaturalKeyColumnName();
             CreateNaturalKey.Expression["CreateDate"] = "GETDATE()";
             CreateNaturalKey.Expression["StageTableName"] = "(DT_STR,150,1252)\"" + p.tableName("STAGE") + "\"";
+            //TODO if dataobject is dimension type, get dataset from dimension
             CreateNaturalKey.Expression["DataSetName"] = "(DT_STR,150,1252)\"" + p.d.MATCHDATASET + "\"";
             Console.WriteLine("Derived Columns added ...");
 
@@ -114,13 +128,12 @@ namespace WpfApplication1.Package
             GetDatasetID.SetCopyOverwriteCols("DataSetID,DataSetID");
             Console.WriteLine("DataSet ID Acquired ...");
 
-            //TODO if DataSetid is 0, insert and return value
-
             GetStageTableID = new EzLookup(this);
             GetStageTableID.Name = "Get Stage Table ID";
             GetStageTableID.AttachTo(GetDatasetID);
             GetStageTableID.SetJoinCols("StageTableName,TableName");
             GetStageTableID.OleDbConnection = p.Conns["Commercial_META"];
+            //TODO better query when more tables are in it table
             GetStageTableID.SqlCommand = "select TableName, TableID from meta_Table";
             GetStageTableID.SetCopyOverwriteCols("Stage_TableID,TableID");
             Console.WriteLine("Stage Table ID Acquired...");

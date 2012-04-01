@@ -9,6 +9,7 @@ namespace WpfApplication1.Mappings
     {
     	
     	private SOURCEOBJECT[] _sourceObjectField;
+    	private LOOKUP[] _lookupField;
     	
     	public SOLUTION s;
 
@@ -32,5 +33,23 @@ namespace WpfApplication1.Mappings
                 _sourceObjectField = value;
             }
         }
+        
+                 [System.Xml.Serialization.XmlArrayAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+                 [System.Xml.Serialization.XmlArrayItemAttribute("LOOKUP", typeof(LOOKUP), Form = System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable = false)]
+        public LOOKUP[] LOOKUPS
+        {
+             get { return _lookupField; }
+            set
+            {
+                foreach (LOOKUP lu in value)
+                {
+                    lu.mapping = this;
+                }
+                _lookupField = value;
+            }
+        }
+        
+        
+        
     }
 }

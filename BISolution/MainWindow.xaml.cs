@@ -38,15 +38,14 @@ namespace WpfApplication1
         public SOLUTION SOLUTION;
 
         public int deployTier(string tierToDeploy) {
-            //foreach object
-                       // insert dataset if new
-            //insert all meta table if new
-
-            TIER t = this.SOLUTION.getTier(tierToDeploy);
+        	
+        	TIER t = this.SOLUTION.getTier(tierToDeploy);
             //foreach (DATASOURCE ds in this.SOLUTION.DATASOURCES)
             //{
             //    foreach (DATAOBJECT d in ds.DATAOBJECTS)
             //    {
+            //    	d.addDataSet();
+            		
 
             //        //TODO some sort of compare to see if we even need to re-run this
             //        d.createMatchTable(true);
@@ -84,7 +83,6 @@ namespace WpfApplication1
         public BISolution(string solutionFile)
         {
             this.solutionFile = solutionFile;
-            //TODO try catch valid XML file
             this.solutionXML = XmlReader.Create(solutionFile);
 
             XmlSerializer ser = new XmlSerializer(typeof(SOLUTION));
@@ -102,6 +100,12 @@ namespace WpfApplication1
         {
             InitializeComponent();
         }
+        
+        //TODO treeview built off XML
+        //TODO form inputs for all parts of XML
+        //TODO context-sensitive checking (natural key uniqueness, etc.)
+        //TODO right-click menus
+        
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {

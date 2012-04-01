@@ -25,13 +25,58 @@ namespace WpfApplication1.Package
         public DIMENSION dim;
         public MAPPING m;
         public string packageType;
+        
+        public string deploymentFolder() {
+        	return string.Format(@"{0}", this.packageType);
+        }
+        
+        public string deploymentDestination() {
+        	return String.Format( @"\{0}\{1}", this.deploymentFolder(), this.tableName() );
+        }
+        
+        public void deployToServer() {
+        		//TODO create folder structure
+        		//TODO deploy package with overwrite
+        		
+        		
+        		 
+            
+            Application app = new Application();
+            
+            // TODO for each folder in deployment folder, if not exists, create (check to see if it recursively creates)
+            app.CreateFolderOnSqlServer("\\", this.packageType, this.t.SSMS.SERVERNAME, null, null);
+          
+            Package pkg = app.LoadPackage(this.fileName(), null);
+            app.SaveToSqlServerAs(pkg, null, this.deploymentDestination(), this.t.SSMS.SERVERNAME, null, null);
+        
+        		
+        }
 
-        public void addVariable(string VariableName, int DefaultValue = 0, bool readOnly = false)
+        public void addVariable(string VariableName, int DefaultValue, bool readOnly = false)
         {
-        	//TODO allow other variable types besides integers
+        
             string[] nameSpace = VariableName.Split(new string[] { "::" }, StringSplitOptions.None);
+            this.Variables.Add(
             this.Variables.Add(nameSpace[1], readOnly, nameSpace[0], DefaultValue);
             //TODO Scope in Variables window shows Class ID instead of namespace's name
+        }
+        
+               public void addVariable(string VariableName, string DefaultValue, bool readOnly = false)
+        {
+        	
+            string[] nameSpace = VariableName.Split(new string[] { "::" }, StringSplitOptions.None);
+            this.Variables.Add(
+            this.Variables.Add(nameSpace[1], readOnly, nameSpace[0], DefaultValue);
+            
+        }
+               
+                      public void addVariable(string VariableName, DateTime DefaultValue, bool readOnly = false)
+        {
+        	
+            string[] nameSpace = VariableName.Split(new string[] { "::" }, StringSplitOptions.None);
+            this.Variables.Add(
+            this.Variables.Add(nameSpace[1], readOnly, nameSpace[0], DefaultValue);
+           
         }
 
         public void addConfigurations()
@@ -45,6 +90,7 @@ namespace WpfApplication1.Package
             foreach (var conn in this.Conns)
             {
                 Microsoft.SqlServer.Dts.Runtime.Configuration config = p.Configurations.Add();
+                //TODO connection prefix needs to be global
                 config.Name = this.t.SSIS.CONNECTIONPREFIX + conn.Value.Name;
                 config.ConfigurationType = DTSConfigurationType.ConfigFile;
                 config.ConfigurationString = String.Format(@"{0}\{1}.dtsConfig", this.t.SSIS.PACKAGECONFIGURATIONFOLDER, config.Name);
@@ -99,6 +145,7 @@ namespace WpfApplication1.Package
 
         }
 
+        //TODO derived class override of this method
         public string tableName(string packageType = null)
         {
             string tableName = "";
@@ -159,7 +206,11 @@ VALUES ('""+ (DT_STR, 25, 1252) @[System::ContainerStartTime] + ""',	'OnPostExec
         {
 
             this.d = d;
+
             this.s = d.ds.s;
+                        if (this.d.TYPE == "DIMENSION") {
+            	this.dim = this.s.getDimension(this.d.DIMENSIONNAME);
+            }
             this.t = s.getCurrentTier();
         }
         

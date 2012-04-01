@@ -91,6 +91,8 @@
     <Compile Include="EzCustom\EzRowCount.cs" />
     <Compile Include="EzCustom\EzRowNumber.cs" />
     <Compile Include="EzCustom\EzSqlTask.cs" />
+    <Compile Include="Mappings\LOOKUP.cs" />
+    <Compile Include="Mappings\LOOKUPCOLUMN.cs" />
     <Compile Include="Mappings\MAPPING.cs" />
     <Compile Include="Mappings\MAPPINGCOLUMN.cs" />
     <Compile Include="Mappings\SOURCEOBJECT.cs" />
@@ -141,6 +143,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="BISolution.xml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -148,7 +151,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="BISolution.xml">
+    <Content Include="BISolution2.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>

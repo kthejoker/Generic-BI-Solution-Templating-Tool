@@ -20,16 +20,42 @@ namespace WpfApplication1.Static
     static class Columns
     {
 
-        public static Dictionary<string, string> Column = new Dictionary<string, string> { 
-            { "STAGE", "MatchKey int NOT NULL, Checksum int NOT NULL" }, 
-            { "PSA", "MatchKey int NOT NULL, Checksum int NOT NULL, CreatedDate datetime NOT NULL, ActionCode varchar(10) NOT NULL, ActiveFlag varchar(1) NOT NULL" },   
-            { "MATCH", "[NaturalKey] [nvarchar](700) NOT NULL, [NaturalKeyColumnName] [nvarchar](400) NOT NULL, [MatchKey] [int] NOT NULL, [DataSetID] [int] NULL" },
-            { "DIM", "MatchKey int NOT NULL"}
+    	//TODO pass these as Column objects
+        public static Dictionary<string, List<WpfApplication1.DataConnection.DataConnection.Column>> Column = new Dictionary<string, List<WpfApplication1.DataConnection.DataConnection.Column>> { 
+    		{ "STAGE", new List<WpfApplication1.DataConnection.DataConnection.Column> { new Column("MatchKey", "int"), new Column("Checksum", "int") } },
+            { "PSA",
+ 				new List<WpfApplication1.DataConnection.DataConnection.Column> { 
+    					new Column("MatchKey", "int"), 
+    					new Column("Checksum", "int"),
+    					new Column("CreatedDate", "datetime"), 
+    					new Column("ActionCode", "varchar(10)"),
+						new Column("ActiveFlag", "char(1)")
+
+
+    			},
+    		{ "MATCH", 
+    			new List<WpfApplication1.DataConnection.DataConnection.Column> { 
+    					new Column("NaturalKey", "nvarchar(700)"), 
+    					new Column("NaturalKeyColumnName", "nvarchar(400)"),
+    					new Column("MatchKey", "int"), 
+    					new Column("DataSetID", "int")
+
+
+    			}
+    				
+    		 },
+            { "DIM",
+    			
+    				new List<WpfApplication1.DataConnection.DataConnection.Column> { 
+    					new Column("MatchKey", "int")
+    				}
+    			}
         };
 
    
    }
 
+    //TODO allow custom types
     static class DimensionAttributeTypes
     {
 

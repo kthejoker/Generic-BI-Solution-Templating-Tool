@@ -35,25 +35,35 @@ namespace WpfApplication1.Package
             this.addVariable("Audit::RowsInserted");
             this.addVariable("Audit::RowsUpdated");
             this.addVariable("Audit::RowsDeleted");
-            this.addVariable("Audit::LastRunDate");
+          
+            this.addVariable("Audit::LastRunDate", new DateTime());
             
 
             // Get last run date to compare against active date.
             EzExecuteSQLTask GetLastRunDate = new EzExecuteSQLTask(this);
             GetLastRunDate.Name = "Get Last Run Date";
-            //TODO correct query
+            //TODO create Run Log Table
             //TODO write result to variable
-            GetLastRunDate.SqlStatementSource = "select 1";
+            GetLastRunDate.SqlStatementSource = "select max(rundate) as maxRunDate from run_log";
             GetLastRunDate.Connection = this.Conns["RUN"];
+            GetLastRunDate.
 
-            //TODO foreach unionable source object, create data flow and attach
-            EzDataFlow UpdateDimension = new DimDataFlow(this, this, this.dim.MAPPING.SOURCEOBJECTS[0]);
-            UpdateDimension.Name = "Update Dimension";
-            UpdateDimension.AttachTo(GetLastRunDate);
+     
+            
+           
+            foreach (SOURCEOBJECT so in this.dim.MAPPING.SOURCEOBJECTS) {
+            
+            	DimDataFlow UpdateDimension = new DimDataFlow(this, this, so );
+            	UpdateDimension.Name = String.Format("Update Dimension - {0} - {1}", so.DATASOURCENAME, so.DATAOBJECTNAME);
+	            UpdateDimension.AttachTo(GetLastRunDate);	
+	            //TODO add reset logic to logger
+	              this.addLogging(UpdateDimension.Name);
+            }
+            
 
             this.SaveToFile(this.fileName());
             this.addConfigurations();
-            this.addLogging(UpdateDimension.Name);
+          
         }
 
     }
@@ -71,9 +81,7 @@ namespace WpfApplication1.Package
             
             EzOleDbSource Source = new EzOleDbSource(this);
             Source.Connection = p.Conns["Source"];
-            
-
-            Source.SqlCommand = String.Format("select * from {0} where ActiveFlag = 'Y' and CreatedDate > '01-01-1900'", so.DATAOBJECT.tableName("PSA"));
+             Source.SqlCommand = String.Format("select * from {0} where ActiveFlag = 'Y' and CreatedDate > '01-01-1900'", so.DATAOBJECT.tableName("PSA"));
             Source.Name = so.DATAOBJECT.tableName("PSA");
             
             EzDerivedColumn DeriveAttributes = new EzDerivedColumn(this);
@@ -98,6 +106,7 @@ namespace WpfApplication1.Package
             RowsMatched.VariableName = "Audit::RowsMatched";
             RowsMatched.AttachTo(ActionCode, 0, 0);
             
+            //TODO correct ole db command query, parameter mapping
             EzOleDbCommand UpdateDimension = new EzOleDbCommand(this);
             UpdateDimension.AttachTo(RowsMatched);
             

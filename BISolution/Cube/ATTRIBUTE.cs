@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using WpfApplication1.DataConnection;
+using DataConnection = WpfApplication1.DataConnection.DataConnection;
 using WpfApplication1.Static;
 
 namespace WpfApplication1.Cube
@@ -10,10 +10,10 @@ namespace WpfApplication1.Cube
     public class ATTRIBUTE
     {
         [System.Xml.Serialization.XmlIgnore]
-        private WpfApplication1.DataConnection.DataConnection.Column c_FIELD;
+        private DataConnection.DataConnection.Column c_FIELD;
 
         [System.Xml.Serialization.XmlIgnore]
-        public WpfApplication1.DataConnection.DataConnection.Column c {
+        public DataConnection.DataConnection.Column c {
                 get { 
                         if (this.c_FIELD == null) {
                             this.DATATYPE = DimensionAttributeTypes.DimensionAttributeType[this.TYPE].Find(delegate(KeyValuePair<string, string> kv) { return kv.Key == "DataType"; }).Value;
@@ -31,19 +31,11 @@ namespace WpfApplication1.Cube
         [System.Xml.Serialization.XmlIgnore]
         public string LENGTH;
 
-
         [System.Xml.Serialization.XmlAttribute("TYPE")]
         public string TYPE { get; set; }
 
-        [System.Xml.Serialization.XmlText]
+        [System.Xml.Serialization.XmlAttribute("NAME")]
         public string NAME { get; set; }
-
-
-        public ATTRIBUTE()
-        {
-       
-
-        }
 
     }
 }
